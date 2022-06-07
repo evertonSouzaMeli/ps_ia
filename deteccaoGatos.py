@@ -12,9 +12,10 @@ date = str(today.year) + '-' + str(today.month) + '-' + str(today.day)
 time = str(today.hour) + ':' + str(today.minute) + ':' + str(today.second)
 caption = caption.Caption("", date, time, "Jardim")
 amostra = 0
+i = 0
 
-for i in imagesList:
-    imagem = cv2.imread(i)
+while i < len(imagesList) or amostra > 5:
+    imagem = cv2.imread(imagesList[i])
     cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2RGB)
     faces = classificador.detectMultiScale(cinza, scaleFactor=1.1)
     if len(faces) > 0:
@@ -38,3 +39,4 @@ for i in imagesList:
                 break
     else:
         print("Não detectamos nenhum gato.")
+    i += 1
